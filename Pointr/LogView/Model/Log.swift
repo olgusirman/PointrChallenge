@@ -49,7 +49,4 @@ struct Log: Identifiable, Hashable {
             }
         }
     }
-
-    static let samples = [Log(message: "First Log"), Log(message: "Second Log")]
-
 }
