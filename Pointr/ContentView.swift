@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @State private var showingSheet = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Button("Show Logger") {
+            showingSheet.toggle()
         }
-        .padding()
+        .sheet(isPresented: $showingSheet) {
+            LogView()
+        }
     }
 }
 

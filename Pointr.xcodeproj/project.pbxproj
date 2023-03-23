@@ -11,6 +11,8 @@
 		C94C23B329CC9FE800ECF3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94C23B229CC9FE800ECF3EF /* ContentView.swift */; };
 		C94C23B529CC9FEA00ECF3EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C94C23B429CC9FEA00ECF3EF /* Assets.xcassets */; };
 		C94C23B829CC9FEA00ECF3EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C94C23B729CC9FEA00ECF3EF /* Preview Assets.xcassets */; };
+		C94C23C429CCD87D00ECF3EF /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94C23C329CCD87D00ECF3EF /* LogView.swift */; };
+		C94C23C729CCD8A500ECF3EF /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94C23C629CCD8A500ECF3EF /* LogModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		C94C23B229CC9FE800ECF3EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C94C23B429CC9FEA00ECF3EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C94C23B729CC9FEA00ECF3EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C94C23C329CCD87D00ECF3EF /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		C94C23C629CCD8A500ECF3EF /* LogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,7 @@
 		C94C23AF29CC9FE800ECF3EF /* Pointr */ = {
 			isa = PBXGroup;
 			children = (
+				C94C23C229CCD87300ECF3EF /* LogView */,
 				C94C23B029CC9FE800ECF3EF /* PointrApp.swift */,
 				C94C23B229CC9FE800ECF3EF /* ContentView.swift */,
 				C94C23B429CC9FEA00ECF3EF /* Assets.xcassets */,
@@ -65,6 +70,23 @@
 				C94C23B729CC9FEA00ECF3EF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C94C23C229CCD87300ECF3EF /* LogView */ = {
+			isa = PBXGroup;
+			children = (
+				C94C23C529CCD89E00ECF3EF /* Model */,
+				C94C23C329CCD87D00ECF3EF /* LogView.swift */,
+			);
+			path = LogView;
+			sourceTree = "<group>";
+		};
+		C94C23C529CCD89E00ECF3EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C94C23C629CCD8A500ECF3EF /* LogModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C94C23B329CC9FE800ECF3EF /* ContentView.swift in Sources */,
+				C94C23C429CCD87D00ECF3EF /* LogView.swift in Sources */,
+				C94C23C729CCD8A500ECF3EF /* LogModel.swift in Sources */,
 				C94C23B129CC9FE800ECF3EF /* PointrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
