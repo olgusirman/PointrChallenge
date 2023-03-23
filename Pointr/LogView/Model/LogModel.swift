@@ -1,42 +1,45 @@
 import Foundation
 import SwiftUI
 
-struct Log: Identifiable, Hashable {
-    var id = UUID()
-    var username: String = ""
-    var message: String
-    var date = Date()
-
-    enum `Type` {
-        case log
-        case info
-        case warning
-        case error
-
-        var accentColor: Color {
-            switch self {
-            case .log:
-                return Color.primary
-            case .info:
-                return Color.yellow
-            case .warning:
-                return Color.orange
-            case .error:
-                return Color.red
-            }
-        }
-    }
-
-    static let samples = [Log(message: "First Log"), Log(message: "Second Log")]
-
-}
-
-// TODO: Provide these values if needed
-// Country & Region
-// Date
-// FPS || GPU
-
 class LogModel: ObservableObject {
 
-    @Published var logs: [Log] = Log.samples
+    @Published var logs: [Log] = []
+
+    private var sleep: (UInt64) async throws -> Void = Task.sleep(nanoseconds:)
+
+    @MainActor
+    func executeLogs() async throws {
+        let sleep = self.sleep
+        var countdown: UInt = 40
+
+        let counter = AsyncStream<Log> {
+            do {
+                try await sleep(1_000_000_000)
+
+                defer { countdown -= 1 }
+
+                let randomLog = UInt.random(in: 1..<countdown)
+
+                switch randomLog {
+                case (0...10):
+                    return Log(message: "Something happened", type: .log)
+                case (11...20):
+                    return Log(message: "Info logs", type: .info)
+                case (21...30):
+                    return Log(message: "Warning logs", type: .warning)
+                case (31...40):
+                    return Log(message: "Error logs", type: .error)
+                default:
+                    return nil
+                }
+
+            } catch {
+                return nil
+            }
+        }
+
+        for await selectedLog in counter {
+            logs.insert(selectedLog, at: 0)
+        }
+    }
 }

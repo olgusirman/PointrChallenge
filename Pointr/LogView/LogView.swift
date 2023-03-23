@@ -1,25 +1,45 @@
 import SwiftUI
 
 struct LogView: View {
+    // MARK: - Environment
     @Environment(\.dismiss) var dismiss
+
+    // MARK: - ViewModel
     @StateObject var viewModel = LogModel()
 
+    // MARK: - Error
+    @State var lastErrorMessage = "" {
+      didSet {
+        isDisplayingError = true
+      }
+    }
+    @State var isDisplayingError = false
+
+    // MARK: - View
     var body: some View {
         VStack {
-            List {
-                // TODO: Pass log count here
-                // TODO: Pass appropriate icons here
-                Section(header: Text("Logs"), footer: Text("Pass log count here")) {
-                    ForEach(viewModel.logs) { log in
-                        Label(log.message, systemImage: "eye.trianglebadge.exclamationmark" )
-                    }
-                }
+            List(viewModel.logs) { log in
+                LogRowView(log: log)
             }
             .listStyle(.plain)
+            .task {
+                do {
+                    try await viewModel.executeLogs()
+                } catch {
+                    lastErrorMessage = error.localizedDescription
+                }
+            }
             Button("Dismiss") {
                 dismiss()
             }
             .padding()
         }
+        .alert("Error Happened", isPresented: $isDisplayingError, actions: {
+          Button("Ok") {
+            dismiss()
+          }
+        }, message: {
+          Text(lastErrorMessage)
+        })
     }
 }
