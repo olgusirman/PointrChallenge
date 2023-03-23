@@ -29,6 +29,7 @@ actor LogModel: ObservableObject {
     @MainActor
     func observeLogs(counter: AsyncStream<Log>) async throws {
         for await selectedLog in counter {
+            // TODO: Swap with a better data structure later, currently O(n)
             logs.insert(selectedLog, at: 0)
         }
     }
