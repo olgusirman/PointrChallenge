@@ -5,15 +5,13 @@ actor LogModel: ObservableObject {
 
     @Published @MainActor private(set) var logs: [Log] = []
 
-    private var sleep: (UInt64) async throws -> Void = Task.sleep(nanoseconds:)
-
     func executeLogs() async throws {
-        let sleep = self.sleep
         var countdown: UInt = 40
 
         let counter = AsyncStream<Log> {
             do {
-                try await sleep(1_000_000_000)
+                let randomSleepTime = UInt64.random(in: 1_000_000..<1_000_000_000)
+                try await Task.sleep(nanoseconds:randomSleepTime)
 
                 defer { countdown -= 1 }
 
