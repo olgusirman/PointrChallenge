@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Pointr
-//
-//  Created by Olgu SIRMAN on 23/03/2023.
-//
-
 import SwiftUI
 
 struct ContentView: View {
