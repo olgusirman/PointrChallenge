@@ -32,4 +32,9 @@ actor LogModel: ObservableObject {
             logs.insert(selectedLog, at: 0)
         }
     }
+
+    @MainActor
+    func clear() {
+        logs.removeAll()
+    }
 }

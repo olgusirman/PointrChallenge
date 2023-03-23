@@ -22,6 +22,12 @@ struct LogView: View {
                 LogRowView(log: log)
             }
             .listStyle(.plain)
+            .refreshable {
+                Task {
+                    viewModel.clear()
+                    try await viewModel.executeLogs()
+                }
+            }
             .task {
                 do {
                     try await viewModel.executeLogs()
