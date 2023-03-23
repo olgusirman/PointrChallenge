@@ -1,13 +1,12 @@
 import Foundation
 import SwiftUI
 
-class LogModel: ObservableObject {
+actor LogModel: ObservableObject {
 
-    @Published var logs: [Log] = []
+    @Published @MainActor private(set) var logs: [Log] = []
 
     private var sleep: (UInt64) async throws -> Void = Task.sleep(nanoseconds:)
 
-    @MainActor
     func executeLogs() async throws {
         let sleep = self.sleep
         var countdown: UInt = 40
@@ -38,6 +37,11 @@ class LogModel: ObservableObject {
             }
         }
 
+        try await observeLogs(counter: counter)
+    }
+
+    @MainActor
+    func observeLogs(counter: AsyncStream<Log>) async throws {
         for await selectedLog in counter {
             logs.insert(selectedLog, at: 0)
         }
