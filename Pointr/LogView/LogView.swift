@@ -8,7 +8,7 @@ struct LogView: View {
     @StateObject var viewModel = LogModel()
 
     // MARK: - Error
-    @State var lastErrorMessage = "" {
+    @State private var lastErrorMessage = "" {
       didSet {
         isDisplayingError = true
       }
