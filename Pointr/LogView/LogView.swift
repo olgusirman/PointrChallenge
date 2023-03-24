@@ -1,11 +1,14 @@
 import SwiftUI
 
+// TODO: Create different buttons for different logs
+// TODO: Keep these logs static and show it when the screen appears for the first time
 struct LogView: View {
     // MARK: - Environment
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var logModel: LogModel
 
     // MARK: - ViewModel
-    @StateObject var viewModel = LogModel()
+    //@StateObject var viewModel = LogModel()
 
     // MARK: - Error
     @State private var lastErrorMessage = "" {
@@ -18,19 +21,19 @@ struct LogView: View {
     // MARK: - View
     var body: some View {
         VStack {
-            List(viewModel.logs) { log in
+            List(logModel.logs) { log in
                 LogRowView(log: log)
             }
             .listStyle(.plain)
             .refreshable {
                 Task {
-                    viewModel.clear()
-                    try await viewModel.executeLogs()
+                    logModel.clear()
+                    try await logModel.executeLogs()
                 }
             }
             .task {
                 do {
-                    try await viewModel.executeLogs()
+                    try await logModel.executeLogs()
                 } catch {
                     lastErrorMessage = error.localizedDescription
                 }

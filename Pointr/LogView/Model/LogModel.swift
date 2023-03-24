@@ -39,3 +39,24 @@ actor LogModel: ObservableObject {
         logs.removeAll()
     }
 }
+
+extension LogModel {
+
+    @MainActor
+    func log(logType: Log.LogType) {
+        switch logType {
+        case .log:
+            let log = Log(message: "Manuel log added", type: .log)
+            logs.insert(log, at: 0)
+        case .info:
+            let log = Log(message: "Info logs added", type: .info)
+            logs.insert(log, at: 0)
+        case .warning:
+            let log = Log(message: "Warning logs added", type: .warning)
+            logs.insert(log, at: 0)
+        case .error:
+            let log = Log(message: "Error log added", type: .error)
+            logs.insert(log, at: 0)
+        }
+    }
+}
